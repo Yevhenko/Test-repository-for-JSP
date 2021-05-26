@@ -1,0 +1,14 @@
+version: '3.1'
+services:
+  dbmain:
+    container_name: dbmain
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_USER: main
+      MYSQL_ROOT_DB: main
+      MYSQL_ROOT_PASSWORD: main
+    ports:
+      - 3306:3306
+    volumes:
+      - ./.data:/var/lib/mysql/data
