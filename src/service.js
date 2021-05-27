@@ -1,6 +1,7 @@
-const { User } = require('../db/models');
+const { User } = require('./db/models');
 
-function errorHandler(err, req, res) {
+// eslint-disable-next-line no-unused-vars
+function errorHandler(err, req, res, next) {
   if (!err) return res.json('Everything is OK!');
 
   return res.status(500).json({ error: err.message });
@@ -45,7 +46,7 @@ async function updateUser(body, params) {
       { where: { id: params.id } },
     );
 
-    return 'order is updated';
+    return 'user is updated';
   } catch (error) {
     throw new Error(error);
   }
@@ -57,7 +58,7 @@ async function deleteUser(params) {
       where: { id: params.id },
     });
 
-    return 'orderProduct deleted';
+    return 'user deleted';
   } catch (error) {
     throw new Error(error);
   }

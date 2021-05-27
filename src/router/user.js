@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {createUser, getOneUser, updateUser, deleteUser} = require('../service');
+const { createUser, getOneUser, updateUser, deleteUser } = require('../service');
 
 const user = express.Router();
 
@@ -9,7 +9,7 @@ user.post('/user', async (req, res, next) => {
     const { name, lastName } = req.body;
 
     if (!name || !lastName) res.status(404).send('Not found!');
-    const user = await createUser({name, lastName});
+    const user = await createUser({ name, lastName });
 
     res.status(200).json(user);
   } catch (error) {
@@ -31,7 +31,7 @@ user.get('/user/:id', async (req, res, next) => {
   }
 });
 
-user.put('/user', async (req, res, next) => {
+user.put('/user/:id', async (req, res, next) => {
   try {
     const { params, body } = req;
     const userId = Number(params.id);
