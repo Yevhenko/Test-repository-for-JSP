@@ -1,8 +1,9 @@
 1. clone repository
-2. run command: sudo docker-compose -f docker-compose.yml up --build
-3. open second terminal and run command: npm run start
-4. to wotk with "User" open Postman
-5. to create user use link: http://localhost:3000/user and method "post" and body: 
+2. run npm install
+3. run command: sudo docker-compose -f docker-compose.yml up --build
+4. open second terminal and run command: npm run db:start and npm run start
+5. to wotk with "User" open Postman
+6. to create user use link: http://localhost:3000/user and method "post" and body: 
 {
     "name": "Yevhen",
     "lastName": "Svyrydov"
