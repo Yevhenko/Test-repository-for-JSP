@@ -1,10 +1,16 @@
 const express = require('express');
 
-const { createUser, getOneUser, updateUser, deleteUser } = require('../service');
+const {
+  createUser,
+  getOneUser,
+  updateUser,
+  deleteUser,
+  assignProjectToUser,
+} = require('../service');
 
-const user = express.Router();
+const userItem = express.Router();
 
-user.post('/user', async (req, res, next) => {
+userItem.post('/user', async (req, res, next) => {
   try {
     const { name, lastName } = req.body;
 
@@ -17,7 +23,23 @@ user.post('/user', async (req, res, next) => {
   }
 });
 
-user.get('/user/:id', async (req, res, next) => {
+userItem.post('/user/:id/assign', async (req, res, next) => {
+  try {
+    const { params } = req;
+    const { projects } = req.body;
+
+    Number(params.id);
+
+    if (!projects) res.status(404).send('Not found!');
+    const response = await assignProjectToUser(projects, params);
+
+    res.status(200).json(response);
+  } catch (error) {
+    next(error);
+  }
+});
+
+userItem.get('/user/:id', async (req, res, next) => {
   try {
     const { params } = req;
     const userId = Number(params.id);
@@ -31,7 +53,7 @@ user.get('/user/:id', async (req, res, next) => {
   }
 });
 
-user.put('/user/:id', async (req, res, next) => {
+userItem.put('/user/:id', async (req, res, next) => {
   try {
     const { params, body } = req;
     const userId = Number(params.id);
@@ -46,7 +68,7 @@ user.put('/user/:id', async (req, res, next) => {
   }
 });
 
-user.delete('/user/:id', async (req, res, next) => {
+userItem.delete('/user/:id', async (req, res, next) => {
   try {
     const { params } = req;
     const userId = Number(params.id);
@@ -60,4 +82,4 @@ user.delete('/user/:id', async (req, res, next) => {
   }
 });
 
-module.exports = user;
+module.exports = userItem;
